@@ -3,9 +3,12 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Routes } from 'react-router-dom';
 import classNames from 'classnames';
-// import Welcome from "./pages/Welcome.jsx";
 import Home from './pages/Home.jsx';
 import Header from './components/Header.jsx';
+import Register from './pages/Register.jsx';
+import Login from './pages/Login.jsx';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
     return (
@@ -25,11 +28,12 @@ function App() {
                 <div className="p-3">
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        {/* <Route  path="/welcome" element={<Welcome />}/> */}
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/login" element={<Login />} />
                     </Routes>
+                    <ToastContainer />
                 </div>
             </div>
-            ;
         </>
     );
 }

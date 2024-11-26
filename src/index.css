@@ -121,3 +121,13 @@ button:focus-visible {
     border-radius: 20px;
     padding: 0.5rem 1rem;
 }
+
+.dropdown-menu .dropdown-item {
+    font-weight: 500; /* Texte plus visible */
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus {
+    color: #333 !important;
+}

@@ -22,72 +22,25 @@ function Home() {
     }, []);
 
     return (
-        <div>
-            <h1>Liste des CV</h1>
-            <ul>
+        <div className="container my-4">
+            <h1 className="mb-4 text-center">Liste des CV</h1>
+            <div className="row g-4">
                 {cvs.map((cv) => (
-                    <li key={cv._id}>
-                        <h2>
-                            {cv.firstname} {cv.lastname}
-                        </h2>
-                        <p>{cv.description}</p>
-
-                        <h3>Diplômes :</h3>
-                        <ul>
-                            {cv.diplomes.map((diplome) => (
-                                <li key={diplome._id}>
-                                    {diplome.title} - {diplome.school} ({diplome.year})
-                                </li>
-                            ))}
-                        </ul>
-
-                        <h3>Certifications :</h3>
-                        <ul>
-                            {cv.certifications.map((certification) => (
-                                <li key={certification._id}>
-                                    {certification.name} ({certification.year}) - {certification.issuedBy}
-                                </li>
-                            ))}
-                        </ul>
-
-                        <h3>Formations :</h3>
-                        <ul>
-                            {cv.formations.map((formation) => (
-                                <li key={formation._id}>
-                                    {formation.name} - {formation.institution} ({formation.year})
-                                </li>
-                            ))}
-                        </ul>
-
-                        <h3>Expériences professionnelles :</h3>
-                        <ul>
-                            {cv.jobs.map((job) => (
-                                <li key={job._id}>
-                                    {job.title} ({job.startYear} - {job.endYear})
-                                </li>
-                            ))}
-                        </ul>
-
-                        <h3>Missions :</h3>
-                        <ul>
-                            {cv.missions.map((mission) => (
-                                <li key={mission._id}>
-                                    {mission.name}: {mission.description}
-                                </li>
-                            ))}
-                        </ul>
-
-                        <h3>Compagnies :</h3>
-                        <ul>
-                            {cv.compagnies.map((company) => (
-                                <li key={company._id}>
-                                    {company.name} - {company.location} ({company.industry})
-                                </li>
-                            ))}
-                        </ul>
-                    </li>
+                    <div className="col-12 col-sm-6 col-md-4" key={cv._id}>
+                        <div className="card shadow-sm">
+                            <div className="card-body">
+                                <h5 className="card-title">
+                                    {cv.firstname} {cv.lastname}
+                                </h5>
+                                <p className="card-text">{cv.description}</p>
+                                <a href={`/cv/${cv._id}`} className="btn btn-primary">
+                                    Voir plus
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 }
