@@ -9,6 +9,7 @@ import Register from './pages/Register.jsx';
 import Login from './pages/Login.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CvDetails from './pages/CvDetails.jsx';
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                 <div className="p-3">
                     <Routes>
                         <Route path="/" element={<Home />} />
+                        <Route path="/cv/:id" element={<CvDetails />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/login" element={<Login />} />
                     </Routes>
