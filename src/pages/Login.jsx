@@ -40,10 +40,11 @@ function Login() {
                             }
 
                             const { user } = await response.json();
-                            const { firstname, lastname, email, token } = user;
+                            const { id, firstname, lastname, email, token } = user;
 
                             login({
                                 user: {
+                                    id,
                                     firstname,
                                     lastname,
                                     email
