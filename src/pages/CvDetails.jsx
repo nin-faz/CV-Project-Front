@@ -35,70 +35,77 @@ function CvDetails() {
     }
 
     return (
-        <div className="container my-5">
-            <div className="row g-4">
-                {/* Informations principales */}
-                <div className="col-12">
-                    <div className="card shadow-sm border-0">
-                        <div className="card-body">
-                            <h1 className="card-title text-primary fw-bold">
-                                CV de {cv.firstname} {cv.lastname}
-                            </h1>
-                            <p className="card-text text-muted">
-                                {' '}
-                                <span style={{ fontWeight: '700', fontSize: '20px' }}> Profil : </span> {cv.description}
-                            </p>
+        <div className="container d-flex justify-content-center align-items-center ">
+            <div className="card shadow-lg p-4" style={{ maxWidth: '700px', width: '100%' }}>
+                <div className="row g-4">
+                    {/* Informations principales */}
+                    <div className="col-12">
+                        <div className="card shadow-sm border-0">
+                            <div className="card-body">
+                                <h1 className="card-title text-primary fw-bold">
+                                    CV de {cv.firstname} {cv.lastname}
+                                </h1>
+                                <p className="card-text text-muted">
+                                    {' '}
+                                    <span style={{ fontWeight: '700', fontSize: '20px' }}> Profil : </span>{' '}
+                                    {cv.description}
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                {[
-                    {
-                        title: 'Diplômes',
-                        items: cv.diplomes,
-                        render: (item) => `${item.title} - ${item.school} (${item.year})`
-                    },
-                    {
-                        title: 'Certifications',
-                        items: cv.certifications,
-                        render: (item) => `${item.name} (${item.year}) - ${item.issuedBy}`
-                    },
-                    {
-                        title: 'Formations',
-                        items: cv.formations,
-                        render: (item) => `${item.name} - ${item.institution} (${item.year})`
-                    },
-                    {
-                        title: 'Expériences professionnelles',
-                        items: cv.jobs,
-                        render: (item) => `${item.title} (${item.startYear} - ${item.endYear})`
-                    },
-                    { title: 'Missions', items: cv.missions, render: (item) => `${item.name}: ${item.description}` },
-                    {
-                        title: 'Compagnies',
-                        items: cv.compagnies,
-                        render: (item) => `${item.name} - ${item.location} (${item.industry})`
-                    }
-                ].map(
-                    (section, index) =>
-                        section.items &&
-                        section.items.length > 0 && (
-                            <div className="col-12" key={index}>
-                                <div className="card shadow-sm border-0">
-                                    <div className="card-body">
-                                        <h3 className="card-title text-primary">{section.title}</h3>
-                                        <ul className="list-group list-group-flush">
-                                            {section.items.map((item, idx) => (
-                                                <li key={idx} className="list-group-item">
-                                                    {section.render(item)}
-                                                </li>
-                                            ))}
-                                        </ul>
+                    {[
+                        {
+                            title: 'Diplômes',
+                            items: cv.diplomes,
+                            render: (item) => `${item.title} - ${item.school} (${item.year})`
+                        },
+                        {
+                            title: 'Certifications',
+                            items: cv.certifications,
+                            render: (item) => `${item.name} (${item.year}) - ${item.issuedBy}`
+                        },
+                        {
+                            title: 'Formations',
+                            items: cv.formations,
+                            render: (item) => `${item.name} - ${item.institution} (${item.year})`
+                        },
+                        {
+                            title: 'Expériences professionnelles',
+                            items: cv.jobs,
+                            render: (item) => `${item.title} (${item.startYear} - ${item.endYear})`
+                        },
+                        {
+                            title: 'Missions',
+                            items: cv.missions,
+                            render: (item) => `${item.name}: ${item.description}`
+                        },
+                        {
+                            title: 'Compagnies',
+                            items: cv.compagnies,
+                            render: (item) => `${item.name} - ${item.location} (${item.industry})`
+                        }
+                    ].map(
+                        (section, index) =>
+                            section.items &&
+                            section.items.length > 0 && (
+                                <div className="col-12" key={index}>
+                                    <div className="card shadow-sm border-0">
+                                        <div className="card-body">
+                                            <h3 className="card-title text-primary">{section.title}</h3>
+                                            <ul className="list-group list-group-flush">
+                                                {section.items.map((item, idx) => (
+                                                    <li key={idx} className="list-group-item">
+                                                        {section.render(item)}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        )
-                )}
+                            )
+                    )}
+                </div>
             </div>
         </div>
     );

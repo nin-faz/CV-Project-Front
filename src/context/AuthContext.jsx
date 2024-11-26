@@ -6,12 +6,15 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(localStorage.getItem('user') ?? null);
     const [token, setToken] = useState(localStorage.getItem('token') ?? null);
 
+    console.log('USERR', user);
+
     const login = (value) => {
         localStorage.setItem('token', value.token);
         localStorage.setItem('user', JSON.stringify(value.user));
         setToken(value.token);
         setUser(value.user);
     };
+
 
     const logout = () => {
         setUser(null);

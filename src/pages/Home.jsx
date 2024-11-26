@@ -11,7 +11,7 @@ function Home() {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 const data = await response.json();
-                console.log('Data:', data);
+                console.log('Liste des CV:', data);
                 setCvs(data);
             } catch (error) {
                 console.error('Failed to fetch CVs:', error);

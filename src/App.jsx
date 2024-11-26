@@ -10,6 +10,9 @@ import Login from './pages/Login.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CvDetails from './pages/CvDetails.jsx';
+import CreateCv from './pages/CreateCv.jsx';
+import EditCv from './pages/EditCv.jsx';
+import MyCVs from './pages/MyCVs.jsx';
 
 function App() {
     return (
@@ -30,8 +33,12 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/cv/:id" element={<CvDetails />} />
+                        <Route path="/my-cvs" element={<MyCVs />} />
+                        <Route path="/create-cv" element={<CreateCv />} />
+                        <Route path="/edit-cv/:id" element={<EditCv />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/login" element={<Login />} />
+                        <Route path="*" element={<div>404 - Not Found</div>} />
                     </Routes>
                     <ToastContainer />
                 </div>

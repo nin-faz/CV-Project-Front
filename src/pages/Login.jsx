@@ -50,7 +50,7 @@ function Login() {
                                 },
                                 token
                             });
-
+                            console.log('Connexion réussie:');
                             toast.success('Vous êtes connectés !');
                             navigate('/');
                         } catch (error) {

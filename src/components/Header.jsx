@@ -18,6 +18,7 @@ function Header() {
 
     const handleLogout = () => {
         logout();
+        console.log('Déconnexion');
         toast.success('Vous avez été déconnecté avec succès !');
     };
 
@@ -55,7 +56,7 @@ function Header() {
                         </li>
                         {user && (
                             <li className="nav-item">
-                                <Link className="nav-link" to="/cv-visibles">
+                                <Link className="nav-link" to="/create-cv">
                                     Creez un CV
                                 </Link>
                             </li>
@@ -97,10 +98,13 @@ function Header() {
                                         <Dropdown.Item as={Link} to="/profil">
                                             Mon Profil
                                         </Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/my-cvs">
+                                            Mes CV
+                                        </Dropdown.Item>
                                         <Dropdown.Item as={Link} to="/mes-recommandations">
                                             Mes recommandations
                                         </Dropdown.Item>
-                                        <Dropdown.Item as={Link} to="/parametres">
+                                        <Dropdown.Item as={Link} to="#">
                                             Paramètres
                                         </Dropdown.Item>
                                         <Dropdown.Divider />
