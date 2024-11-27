@@ -22,7 +22,7 @@ function EditCv() {
                     throw new Error('Failed to fetch CV');
                 }
                 const data = await response.json();
-                setCv(data);
+                setCv(data.cv);
             } catch (error) {
                 console.error(error);
                 toast.error('Erreur lors de la récupération du CV.');
@@ -66,8 +66,9 @@ function EditCv() {
             if (!response.ok) {
                 throw new Error('Failed to update CV');
             }
+            console.log('CV mise à jour :', response);
             toast.success('CV mis à jour avec succès !');
-            navigate('/mes-cvs');
+            navigate('/my-cvs');
         } catch (error) {
             console.error(error);
             toast.error('Erreur lors de la mise à jour du CV.');
