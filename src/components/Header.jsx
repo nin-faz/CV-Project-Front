@@ -25,7 +25,6 @@ function Header() {
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary shadow-sm p-3">
             <div className="container-fluid">
-                {/* Logo ou Titre */}
                 <Link className="navbar-brand text-primary fw-bold" to="/">
                     CV Builder
                 </Link>

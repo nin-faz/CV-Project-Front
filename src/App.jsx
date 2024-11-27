@@ -13,37 +13,72 @@ import CvDetails from './pages/CvDetails.jsx';
 import CreateCv from './pages/CreateCv.jsx';
 import EditCv from './pages/EditCv.jsx';
 import MyCVs from './pages/MyCVs.jsx';
+import NotFound from './pages/NotFound.jsx';
+import ProtectedRoute from './routes/ProtectedRoute.jsx';
 
 function App() {
     return (
-        <>
-            <div
-                className={classNames(
-                    'w-100 vh-100 bg-light text-dark'
-                    //   {
-                    //     'bg-dark text-light': theme === 'dark',
-                    //     'bg-light text-dark': theme === 'light'
-                    // }
-                )}
-            >
-                <div className="row">
-                    <Header />
-                </div>
-                <div className="p-3">
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/cv/:id" element={<CvDetails />} />
-                        <Route path="/my-cvs" element={<MyCVs />} />
-                        <Route path="/create-cv" element={<CreateCv />} />
-                        <Route path="/edit-cv/:id" element={<EditCv />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="*" element={<div>404 - Not Found</div>} />
-                    </Routes>
-                    <ToastContainer />
-                </div>
+        <div
+            className={classNames(
+                'w-100 vh-100 bg-light text-dark'
+                //   {
+                //     'bg-dark text-light': theme === 'dark',
+                //     'bg-light text-dark': theme === 'light'
+                // }
+            )}
+        >
+            <div className="row">
+                <Header />
             </div>
-        </>
+            <div className="p-3">
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/login" element={<Login />} />
+
+                    {/* Protected routes */}
+                    <Route
+                        path="/cv/:id"
+                        element={
+                            <ProtectedRoute>
+                                <CvDetails />
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    <Route
+                        path="/create-cv"
+                        element={
+                            <ProtectedRoute>
+                                <CreateCv />
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    <Route
+                        path="/edit-cv/:id"
+                        element={
+                            <ProtectedRoute>
+                                <EditCv />
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    <Route
+                        path="/my-cvs"
+                        element={
+                            <ProtectedRoute>
+                                <MyCVs />
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    {/*404*/}
+                    <Route path="/*" element={<NotFound />} />
+                </Routes>
+                <ToastContainer />
+            </div>
+        </div>
     );
 }
 
