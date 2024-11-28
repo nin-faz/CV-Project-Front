@@ -7,9 +7,6 @@ function MyCVs() {
     const { token, user } = useContext(AuthContext);
     const [cvs, setCvs] = useState([]);
 
-    console.log('user', user);
-    console.log('userID', user ? user.id : 'User is null or undefined');
-
     useEffect(() => {
         const fetchCVs = async () => {
             try {

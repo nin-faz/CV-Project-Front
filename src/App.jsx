@@ -15,6 +15,8 @@ import EditCv from './pages/EditCv.jsx';
 import MyCVs from './pages/MyCVs.jsx';
 import NotFound from './pages/NotFound.jsx';
 import ProtectedRoute from './routes/ProtectedRoute.jsx';
+import MyProfile from './pages/MyProfile.jsx';
+import ChangePassword from './pages/ChangePassword.jsx';
 
 function App() {
     return (
@@ -69,6 +71,24 @@ function App() {
                         element={
                             <ProtectedRoute>
                                 <MyCVs />
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    <Route
+                        path="/profile"
+                        element={
+                            <ProtectedRoute>
+                                <MyProfile />
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    <Route
+                        path="/edit-password"
+                        element={
+                            <ProtectedRoute>
+                                <ChangePassword />
                             </ProtectedRoute>
                         }
                     />

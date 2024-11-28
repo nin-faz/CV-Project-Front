@@ -97,6 +97,9 @@ function Header() {
                                         <Dropdown.Item as={Link} to="/profil">
                                             Mon Profil
                                         </Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/edit-password">
+                                            Modifier mon mot de passe
+                                        </Dropdown.Item>
                                         <Dropdown.Item as={Link} to="/my-cvs">
                                             Mes CV
                                         </Dropdown.Item>
