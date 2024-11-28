@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 
 const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(localStorage.getItem('user') ?? null);
+    const [user, setUser] = useState(() => {
+        const storedUser = localStorage.getItem('user');
+        return storedUser ? JSON.parse(storedUser) : null;
+    });
     const [token, setToken] = useState(localStorage.getItem('token') ?? null);
-
-    console.log('USERR', user);
 
     const login = (value) => {
         localStorage.setItem('token', value.token);
@@ -14,7 +15,6 @@ const AuthProvider = ({ children }) => {
         setToken(value.token);
         setUser(value.user);
     };
-
 
     const logout = () => {
         setUser(null);
@@ -37,7 +37,7 @@ const AuthProvider = ({ children }) => {
     );
 };
 AuthProvider.propTypes = {
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired
 };
 
 export { AuthContext, AuthProvider };

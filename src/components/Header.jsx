@@ -4,16 +4,11 @@ import { Dropdown } from 'react-bootstrap';
 import { FaSearch, FaUserCircle } from 'react-icons/fa';
 import { AuthContext } from '../context/AuthContext.jsx';
 import { toast } from 'react-toastify';
+import { SearchContext } from '../context/SearchContext.jsx';
+
 import 'react-toastify/dist/ReactToastify.css';
 
 function Header() {
-    // const [searchTerm, setSearchTerm] = useState('');
-
-    // const handleSearch = () => {
-    //     console.log(`Rechercher : ${searchTerm}`);
-    //     // Ajoute ici la logique pour exécuter la recherche, par exemple, une API call.
-    // };
-
     const { user, logout } = useContext(AuthContext);
 
     const handleLogout = () => {
@@ -22,10 +17,11 @@ function Header() {
         toast.success('Vous avez été déconnecté avec succès !');
     };
 
+    const {searchTerm, setSearchTerm} = useContext(SearchContext);
+
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary shadow-sm p-3">
             <div className="container-fluid">
-                {/* Logo ou Titre */}
                 <Link className="navbar-brand text-primary fw-bold" to="/">
                     CV Builder
                 </Link>
@@ -64,9 +60,18 @@ function Header() {
                     </ul>
 
                     {/* Barre de recherche */}
-                    <div className="search-bar position-relative">
-                        <input type="text" className="form-control search-input" placeholder="Rechercher des CV..." />
-                        <FaSearch className="search-icon position-absolute" onClick={'handleSearch'} />
+                    <div className="search-bar position-relative me-3 d-flex align-items-center">
+                        <input
+                            type="text"
+                            className="form-control search-input"
+                            placeholder="Rechercher des CV..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                        <FaSearch
+                            className="search-icon position-absolute"
+                            style={{ cursor: 'pointer', right: '10px' }} // Style pour rendre la loupe cliquable
+                        />
                     </div>
 
                     {/* Authentification (aligné à droite) */}
@@ -85,35 +90,36 @@ function Header() {
                                 </li>
                             </>
                         ) : (
-                            <>
-                                <Dropdown>
-                                    <Dropdown.Toggle
-                                        variant="link"
-                                        className="text-decoration-none text-dark d-flex align-items-center"
-                                    >
-                                        <FaUserCircle size={30} className="me-2" />
-                                        <span>Mon Compte</span>
-                                    </Dropdown.Toggle>
-                                    <Dropdown.Menu align="end">
-                                        <Dropdown.Item as={Link} to="/profil">
-                                            Mon Profil
-                                        </Dropdown.Item>
-                                        <Dropdown.Item as={Link} to="/my-cvs">
-                                            Mes CV
-                                        </Dropdown.Item>
-                                        <Dropdown.Item as={Link} to="/mes-recommandations">
-                                            Mes recommandations
-                                        </Dropdown.Item>
-                                        <Dropdown.Item as={Link} to="#">
-                                            Paramètres
-                                        </Dropdown.Item>
-                                        <Dropdown.Divider />
-                                        <Dropdown.Item as={Link} to="/" onClick={handleLogout} >
-                                            Déconnexion
-                                        </Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                            </>
+                            <Dropdown>
+                                <Dropdown.Toggle
+                                    variant="link"
+                                    className="text-decoration-none text-dark d-flex align-items-center"
+                                >
+                                    <FaUserCircle size={30} className="me-2" />
+                                    <span>Mon Compte</span>
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu align="end">
+                                    <Dropdown.Item as={Link} to="/profile">
+                                        Mon Profil
+                                    </Dropdown.Item>
+                                    <Dropdown.Item as={Link} to="/my-cvs">
+                                        Mes CV
+                                    </Dropdown.Item>
+                                    <Dropdown.Item as={Link} to="/edit-password">
+                                        Modifier mon mot de passe
+                                    </Dropdown.Item>
+                                    <Dropdown.Item as={Link} to="/mes-recommandations">
+                                        Mes recommandations
+                                    </Dropdown.Item>
+                                    <Dropdown.Item as={Link} to="#">
+                                        Paramètres
+                                    </Dropdown.Item>
+                                    <Dropdown.Divider />
+                                    <Dropdown.Item as={Link} to="/" onClick={handleLogout}>
+                                        Déconnexion
+                                    </Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
                         )}
                     </ul>
                 </div>

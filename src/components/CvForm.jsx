@@ -57,6 +57,7 @@ function CvForm({ initialValues, onSubmit, isEditing }) {
         ),
         visible: Yup.boolean().required('Required')
     });
+    
 
     return (
         <div className="container d-flex justify-content-center align-items-center">
