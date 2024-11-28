@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Dropdown } from 'react-bootstrap';
 import { FaSearch, FaUserCircle } from 'react-icons/fa';
@@ -17,11 +17,7 @@ function Header() {
         toast.success('Vous avez été déconnecté avec succès !');
     };
 
-    const {searchTerm, setSearchTerm} = useContext(SearchContext); // État pour capturer la recherche
-
-    useEffect(() => {
-        console.log('Recherche (HEADER):', searchTerm);
-    }, [searchTerm]);
+    const {searchTerm, setSearchTerm} = useContext(SearchContext);
 
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary shadow-sm p-3">

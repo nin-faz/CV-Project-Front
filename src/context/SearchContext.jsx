@@ -5,8 +5,6 @@ const SearchContext = createContext(null);
 
 const SearchProvider = ({ children }) => {
     const [searchTerm, setSearchTerm] = useState('');
-    console.log('SearchContext chargé', searchTerm);
-
     return <SearchContext.Provider value={{ searchTerm, setSearchTerm }}>{children}</SearchContext.Provider>;
 };
 
