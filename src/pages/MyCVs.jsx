@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 function MyCVs() {
     const { token, user } = useContext(AuthContext);
     const [cvs, setCvs] = useState([]);
+    const [recommendations, setRecommendations] = useState({});
 
     useEffect(() => {
         const fetchCVs = async () => {
@@ -23,6 +24,8 @@ function MyCVs() {
 
                 const data = await response.json();
                 setCvs(data);
+
+                data.forEach(cv => fetchRecommendations(cv._id));
             } catch (error) {
                 console.error(error);
                 toast.error('Erreur lors de la récupération des CVs.');
@@ -32,7 +35,27 @@ function MyCVs() {
         fetchCVs();
     }, [token, user]);
 
-    const handleDelete = async (id) => {
+    const fetchRecommendations = async (cvId) => {
+        try {
+            const response = await fetch(`https://cv-project-api.onrender.com/api/recommendation/cv/${cvId}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Erreur HTTP : ' + response.status);
+            }
+
+            const data = await response.json();
+            setRecommendations(prev => ({ ...prev, [cvId]: data }));
+        } catch (error) {
+            console.error('Erreur lors de la récupération des recommandations :', error);
+        }
+    };
+
+    const handleDeleteCV = async (id) => {
         const confirmDelete = window.confirm('Êtes-vous sûr de vouloir supprimer ce CV ?');
         if (!confirmDelete) {
             return;
@@ -55,6 +78,35 @@ function MyCVs() {
         } catch (error) {
             console.error(error);
             toast.error('Erreur lors de la suppression du CV.');
+        }
+    };
+
+    const handleDeleteRecommendation = async (cvId, recId) => {
+        const confirmDelete = window.confirm('Êtes-vous sûr de vouloir supprimer cette recommandation ?');
+        if (!confirmDelete) {
+            return;
+        }
+        try {
+            const response = await fetch(`https://cv-project-api.onrender.com/api/recommendation/${recId}`, {
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Échec de la suppression de la recommandation');
+            }
+
+            setRecommendations(prev => ({
+                ...prev,
+                [cvId]: prev[cvId].filter((rec) => rec._id !== recId)
+            }));
+            console.log('Recommandation supprimée avec succès.');
+            toast.success('Recommandation supprimée avec succès.');
+        } catch (error) {
+            console.error(error);
+            toast.error('Erreur lors de la suppression de la recommandation.');
         }
     };
 
@@ -159,12 +211,32 @@ function MyCVs() {
                                         </div>
                                     )}
 
+                                    {/* Recommandations */}
+                                    {recommendations[cv._id] && recommendations[cv._id].length > 0 && (
+                                        <div className="mb-3">
+                                            <h5>Recommandations:</h5>
+                                            <ul className="list-group">
+                                                {recommendations[cv._id].map((rec, index) => (
+                                                    <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+                                                        <span>{rec.description}</span>
+                                                        <button
+                                                            className="btn btn-danger btn-sm"
+                                                            onClick={() => handleDeleteRecommendation(cv._id, rec._id)}
+                                                        >
+                                                            Supprimer
+                                                        </button>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
+
                                     {/* Boutons */}
                                     <div className="d-flex justify-content-between">
                                         <Link to={`/edit-cv/${cv._id}`} className="btn btn-outline-primary">
                                             Modifier
                                         </Link>
-                                        <button className="btn btn-danger" onClick={() => handleDelete(cv._id)}>
+                                        <button className="btn btn-danger" onClick={() => handleDeleteCV(cv._id)}>
                                             Supprimer
                                         </button>
                                     </div>

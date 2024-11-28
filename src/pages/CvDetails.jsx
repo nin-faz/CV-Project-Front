@@ -50,7 +50,7 @@ function CvDetails() {
                 throw new Error(`Erreur HTTP : ${response.status}`);
             }
             const data = await response.json();
-            setRecommendations(data.recommendations || []);
+            setRecommendations(data || []);
         } catch (error) {
             console.error('Erreur lors de la récupération des recommandations :', error);
         }
