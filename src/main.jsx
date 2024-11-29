@@ -5,14 +5,17 @@ import App from './App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext.jsx';
 import { SearchProvider } from './context/SearchContext.jsx';
+import { ThemeProvider } from './context/ThemeContext.jsx';
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
         <BrowserRouter>
             <AuthProvider>
-                <SearchProvider>
-                    <App />
-                </SearchProvider>
+                <ThemeProvider>
+                    <SearchProvider>
+                        <App />
+                    </SearchProvider>
+                </ThemeProvider>
             </AuthProvider>
         </BrowserRouter>
     </StrictMode>

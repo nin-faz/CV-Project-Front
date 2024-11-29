@@ -5,6 +5,7 @@ import { FaSearch, FaUserCircle } from 'react-icons/fa';
 import { AuthContext } from '../context/AuthContext.jsx';
 import { toast } from 'react-toastify';
 import { SearchContext } from '../context/SearchContext.jsx';
+import ToggleButton from './ToggleButton.jsx';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -57,6 +58,9 @@ function Header() {
                                 </Link>
                             </li>
                         )}
+                        <li className="nav-item py-2">
+                            <ToggleButton />
+                        </li>
                     </ul>
 
                     {/* Barre de recherche */}

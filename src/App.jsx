@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Routes } from 'react-router-dom';
@@ -17,17 +17,17 @@ import NotFound from './pages/NotFound.jsx';
 import ProtectedRoute from './routes/ProtectedRoute.jsx';
 import MyProfile from './pages/MyProfile.jsx';
 import ChangePassword from './pages/ChangePassword.jsx';
+import { ThemeContext } from './context/ThemeContext.jsx';
 
 function App() {
+    const { theme } = useContext(ThemeContext);
+
     return (
         <div
-            className={classNames(
-                'w-100 vh-100 bg-light text-dark'
-                //   {
-                //     'bg-dark text-light': theme === 'dark',
-                //     'bg-light text-dark': theme === 'light'
-                // }
-            )}
+            className={classNames('w-100 min-vh-100 bg-light text-dark', {
+                'bg-dark text-white': theme === 'dark',
+                'bg-light text-dark': theme === 'light'
+            })}
         >
             <div className="row">
                 <Header />
