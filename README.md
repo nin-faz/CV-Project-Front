@@ -120,7 +120,7 @@ http://localhost:5173
 ## Déploiement 🌐
 Le frontend de cette application a été déployé sur Render pour offrir une expérience utilisateur fluide et accessible en ligne.
 
-URL de l'application : Lien vers l'application
+URL de l'application : https://cv-project-front.onrender.com/
 
 ## Backend (Node.js avec Express) 🚀
 Le backend de l'application est disponible sur un dépôt Git distinct. Il gère les fonctionnalités telles que l'authentification, la gestion des CV, et les recommandations.
