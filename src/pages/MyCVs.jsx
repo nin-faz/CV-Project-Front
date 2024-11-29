@@ -27,7 +27,7 @@ function MyCVs() {
                 const data = await response.json();
                 setCvs(data);
 
-                data.forEach(cv => fetchRecommendations(cv._id));
+                data.forEach((cv) => fetchRecommendations(cv._id));
             } catch (error) {
                 console.error(error);
                 toast.error('Erreur lors de la récupération des CVs.');
@@ -51,7 +51,7 @@ function MyCVs() {
             }
 
             const data = await response.json();
-            setRecommendations(prev => ({ ...prev, [cvId]: data }));
+            setRecommendations((prev) => ({ ...prev, [cvId]: data }));
         } catch (error) {
             console.error('Erreur lors de la récupération des recommandations :', error);
         }
@@ -100,7 +100,7 @@ function MyCVs() {
                 throw new Error('Échec de la suppression de la recommandation');
             }
 
-            setRecommendations(prev => ({
+            setRecommendations((prev) => ({
                 ...prev,
                 [cvId]: prev[cvId].filter((rec) => rec._id !== recId)
             }));
@@ -213,39 +213,6 @@ function MyCVs() {
                                         </div>
                                     )}
 
-                                    {/* Recommandations */}
-                                    {recommendations[cv._id] && recommendations[cv._id].length > 0 && (
-                                        <div className="mb-3">
-                                            <h5>Recommandations:</h5>
-                                            <ul className="list-group">
-                                            {recommendations[cv._id].map((rec, index) => (
-                                                <li
-                                                key={index}
-                                                className="list-group-item d-flex flex-column align-items-start"
-                                                >
-                                                <span className="mb-2">{rec.description}</span>
-                                                {rec.userid && (
-                                                    <p className="mb-1 text-muted">
-                                                    <strong>Par :</strong> {rec.userid.firstname} {rec.userid.lastname}
-                                                    </p>
-                                                )}
-                                                <p className="mb-3">
-                                                    <strong>Le :</strong>{' '}
-                                                    {format(new Date(rec.createdAt), 'dd MMMM yyyy', { locale: fr })}
-                                                </p>
-                                                <button
-                                                    className="btn btn-danger btn-sm align-self-end"
-                                                    onClick={() => handleDeleteRecommendation(cv._id, rec._id)}
-                                                >
-                                                    Supprimer
-                                                </button>
-                                                </li>
-                                            ))}
-                                            </ul>
-                                        </div>
-                                        )}
-
-
                                     {/* Boutons */}
                                     <div className="d-flex justify-content-between">
                                         <Link to={`/edit-cv/${cv._id}`} className="btn btn-outline-primary">
@@ -257,6 +224,50 @@ function MyCVs() {
                                     </div>
                                 </div>
                             </div>
+                            {/* Recommandations */}
+                            {recommendations[cv._id] && recommendations[cv._id].length > 0 && (
+                                <div className="mb-3">
+                                    <h5>Recommandations:</h5>
+                                    <ul className="list-group">
+                                        {recommendations[cv._id].map((rec, index) => (
+                                            <li
+                                                key={index}
+                                                className="list-group-item d-flex flex-column align-items-start"
+                                            >
+                                                <div className="row mb-1">
+                                                    {/* Colonne gauche pour la date */}
+                                                    <div className="col text-start" style={{ width: '250px' }}>
+                                                        <p className="mb-0 text-muted">
+                                                            <strong>Le :</strong>{' '}
+                                                            {format(new Date(rec.createdAt), 'dd/MM/yy à HH:mm', {
+                                                                locale: fr
+                                                            })}
+                                                        </p>
+                                                    </div>
+
+                                                    {/* Colonne droite pour l'auteur */}
+                                                    <div className="col text-end">
+                                                        {rec.userid && (
+                                                            <p className="mb-0 text-muted">
+                                                                <strong>Par :</strong> {rec.userid.firstname}{' '}
+                                                                {rec.userid.lastname}
+                                                            </p>
+                                                        )}
+                                                    </div>
+                                                </div>
+
+                                                <span className="mt-2">{rec.description}</span>
+                                                <button
+                                                    className="btn btn-danger btn-sm align-self-end"
+                                                    onClick={() => handleDeleteRecommendation(cv._id, rec._id)}
+                                                >
+                                                    Supprimer
+                                                </button>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
                         </div>
                     ))}
                 </div>

@@ -112,12 +112,6 @@ function Header() {
                                     <Dropdown.Item as={Link} to="/edit-password">
                                         Modifier mon mot de passe
                                     </Dropdown.Item>
-                                    <Dropdown.Item as={Link} to="/mes-recommandations">
-                                        Mes recommandations
-                                    </Dropdown.Item>
-                                    <Dropdown.Item as={Link} to="#">
-                                        Paramètres
-                                    </Dropdown.Item>
                                     <Dropdown.Divider />
                                     <Dropdown.Item as={Link} to="/" onClick={handleLogout}>
                                         Déconnexion
