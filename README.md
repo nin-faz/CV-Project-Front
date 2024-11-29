@@ -88,7 +88,7 @@ Hey à toi de jouer ! Pour tester l'application en tant qu'utilisateur authentif
 - Git : Versioning.
 
 ## Prérequis :
-Liste des différentes technologies et outils nécessaires avant de commencer :
+Liste des différentes technologies et outils :
 - npm create vite@latest
 - npm install prop-types
 - npm install react-router-dom
