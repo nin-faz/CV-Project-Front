@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 
 function MyProfile() {
-    const { token, logout } = useContext(AuthContext);
+    const { token, user, logout } = useContext(AuthContext);
     const [profile, setProfile] = useState({
         firstname: '',
         lastname: '',
@@ -45,6 +45,8 @@ function MyProfile() {
 
     const handleSubmit = async (values) => {
         try {
+            const isEmailChanged = values.email !== user.email;
+
             const response = await fetch('https://cv-project-api.onrender.com/api/user/me', {
                 method: 'PUT',
                 headers: {
@@ -58,10 +60,15 @@ function MyProfile() {
                 throw new Error('Erreur lors de la mise à jour du profil');
             }
 
-            logout();
-            console.log('Profil mis à jour avec succès ! Redirection au Login');
-            toast.success('Profil mis à jour avec succès !');
-            navigate('/login');
+            if (isEmailChanged) {
+                logout();
+                console.log('Profil mis à jour avec succès ! Redirection au Login');
+                toast.success('Profil mis à jour avec succès. Veuillez vous reconnecter.');
+                navigate('/login');
+            } else {
+                console.log('Profil mis à jour avec succès !');
+                toast.success('Profil mis à jour avec succès.');
+            }
         } catch (error) {
             console.error(error);
             toast.error('Erreur lors de la mise à jour du profil.');

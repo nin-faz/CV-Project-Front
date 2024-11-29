@@ -48,7 +48,7 @@ function CreateCv() {
                 throw new Error('Failed to create CV');
             }
             toast.success('CV créé avec succès !');
-            navigate('/');
+            navigate('/CVs');
         } catch (error) {
             console.error(error);
             toast.error('Erreur lors de la création du CV.');
