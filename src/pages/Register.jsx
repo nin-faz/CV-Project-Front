@@ -50,6 +50,13 @@ function Register() {
                                 }
                             );
                             const data = await response.json();
+
+                            if (response.status === 400) {
+                                throw new Error('Le mot de passe doit contenir au moins une majuscule et un chiffre.');
+                            } else if (!response.ok) {
+                                throw new Error('Erreur lors de la mise à jour du mot de passe');
+                            }
+
                             if (!response.ok) {
                                 throw new Error(`HTTP error! Status: ${response.status} ${data.error}`);
                             }
@@ -57,7 +64,7 @@ function Register() {
                             navigate('/login');
                         } catch (error) {
                             console.error('Échec de l\'inscription :', error);
-                            toast.error('Échec de l\'inscription. Vérifiez vos informations.');
+                            toast.error(error.message);
                         }
                     }}
                 >

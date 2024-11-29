@@ -62,7 +62,6 @@ function ChangePassword() {
                 >
                     {({ isSubmitting }) => (
                         <Form>
-                            {/* Nouveau mot de passe */}
                             <div className="form-group mb-4">
                                 <label htmlFor="newPassword">Nouveau mot de passe :</label>
                                 <Field
@@ -74,7 +73,6 @@ function ChangePassword() {
                                 <ErrorMessage name="newPassword" component="div" style={{ color: 'red' }} />
                             </div>
 
-                            {/* Confirmation du mot de passe */}
                             <div className="form-group mb-4">
                                 <label htmlFor="confirmPassword">Confirmer le mot de passe :</label>
                                 <Field

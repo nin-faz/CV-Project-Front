@@ -235,7 +235,6 @@ function MyCVs() {
                                                 className="list-group-item d-flex flex-column align-items-start"
                                             >
                                                 <div className="row mb-1">
-                                                    {/* Colonne gauche pour la date */}
                                                     <div className="col text-start" style={{ width: '250px' }}>
                                                         <p className="mb-0 text-muted">
                                                             <strong>Le :</strong>{' '}
@@ -245,7 +244,6 @@ function MyCVs() {
                                                         </p>
                                                     </div>
 
-                                                    {/* Colonne droite pour l'auteur */}
                                                     <div className="col text-end">
                                                         {rec.userid && (
                                                             <p className="mb-0 text-muted">
