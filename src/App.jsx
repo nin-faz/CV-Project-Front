@@ -17,7 +17,7 @@ import NotFound from './pages/NotFound.jsx';
 import ProtectedRoute from './routes/ProtectedRoute.jsx';
 import MyProfile from './pages/MyProfile.jsx';
 import ChangePassword from './pages/ChangePassword.jsx';
-import ListCV from './pages/ListCV.jsx';
+import CvList from './pages/CvList.jsx';
 import { ThemeContext } from './context/ThemeContext.jsx';
 
 function App() {
@@ -36,7 +36,7 @@ function App() {
             <div className="p-3">
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/CVs" element={<ListCV />} />
+                    <Route path="/CVs" element={<CvList />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
 

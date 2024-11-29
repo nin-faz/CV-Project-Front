@@ -11,17 +11,32 @@ function Recommendations({ recommendations = [] }) {
     return (
         <ul className="list-group mb-4">
             {recommendations.map((rec, index) => (
-                <li key={index} className="list-group-item">
-                    <p>{rec.description}</p>
-                    {rec.userid && (
-                        <p className="text-muted">Par: {rec.userid.firstname} {rec.userid.lastname}</p>
-                    )}
-                        <p>Le {format(new Date(rec.createdAt), 'dd MMMM yyyy', { locale: fr })}</p>                </li>
+                <li key={index} className="list-group-item" style={{ textAlign: 'left' }}>
+                    <div className="row mb-3">
+                        <div className="col text-start">
+                            <p className="mb-0 text-muted">
+                                <strong>Le :</strong>{' '}
+                                {format(new Date(rec.createdAt), 'dd/MM/yy à HH:mm', {
+                                    locale: fr
+                                })}
+                            </p>
+                        </div>
+
+                        <div className="col text-end">
+                            {rec.userid && (
+                                <p className="mb-0 text-muted">
+                                    <strong>Par :</strong> {rec.userid.firstname} {rec.userid.lastname}
+                                </p>
+                            )}
+                        </div>
+                    </div>
+
+                    <span>{rec.description}</span>
+                </li>
             ))}
         </ul>
     );
 }
-
 
 Recommendations.propTypes = {
     recommendations: PropTypes.arrayOf(

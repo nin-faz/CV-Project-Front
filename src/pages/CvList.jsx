@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { SearchContext } from '../context/SearchContext.jsx';
+import LoadingScreen from '../components/LoadingScreen.jsx';
 
-function ListCV() {
+
+function CvList() {
     const [cvs, setCvs] = useState([]); // Liste complète des CV
     const [cvsFiltered, setCvsFiltered] = useState([]); // Liste filtrée pour affichage
     const { searchTerm } = useContext(SearchContext);
+    const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        console.log('Recherche:', searchTerm);
-    }, [searchTerm]);
+    
 
-    // Récupérer tous les CV lors du montage du composant
+    // Récupérer tous les CV
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -36,11 +37,17 @@ function ListCV() {
                 }
             } catch (error) {
                 console.error('Failed to fetch CVs:', error);
+            } finally {
+                setIsLoading(false);
             }
         };
 
         fetchData();
     }, [searchTerm]);
+
+    if (isLoading) {
+        return <LoadingScreen />;
+    }
 
     return (
         <div className="container my-4">
@@ -70,4 +77,4 @@ function ListCV() {
     );
 }
 
-export default ListCV;
+export default CvList;

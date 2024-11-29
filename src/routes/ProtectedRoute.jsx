@@ -19,7 +19,7 @@ const ProtectedRoute = ({ children }) => {
                 progress: undefined,
             });
         }
-    }, [user]);
+    }, []);
 
     return user ? children : <Navigate to="/login" />;
 };

@@ -61,6 +61,7 @@ function MyProfile() {
             }
 
             if (isEmailChanged) {
+                toast.dismiss();
                 logout();
                 console.log('Profil mis à jour avec succès ! Redirection au Login');
                 toast.success('Profil mis à jour avec succès. Veuillez vous reconnecter.');

@@ -175,7 +175,7 @@ function CvDetails() {
 
                 {/* Colonne droite : Recommandations */}
                 <div className="col-lg-4">
-                    <div className="card shadow-lg p-4">
+                    <div className="card shadow-lg p-4" style={{ width: '110%'}}>
                         <div className="card-body">
                             <h3 className="card-title text-primary">Recommandations</h3>
                             <Recommendations recommendations={recommendations || []} />

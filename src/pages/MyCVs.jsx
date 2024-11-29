@@ -4,15 +4,21 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
+import LoadingScreen from '../components/LoadingScreen.jsx';
 
 function MyCVs() {
     const { token, user } = useContext(AuthContext);
     const [cvs, setCvs] = useState([]);
     const [recommendations, setRecommendations] = useState({});
 
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
         const fetchCVs = async () => {
             try {
+                setIsLoading(true);
+
+                // Récupérer tous les CVs avec leurs recommandations
                 const response = await fetch(`https://cv-project-api.onrender.com/api/cv/me/${user.id}`, {
                     headers: {
                         'Content-Type': 'application/json',
@@ -25,37 +31,40 @@ function MyCVs() {
                 }
 
                 const data = await response.json();
-                setCvs(data);
 
-                data.forEach((cv) => fetchRecommendations(cv._id));
+                // Charger les recommandations pour chaque CV
+                const updatedCVs = await Promise.all(
+                    data.map(async (cv) => {
+                        const recResponse = await fetch(
+                            `https://cv-project-api.onrender.com/api/recommendation/cv/${cv._id}`,
+                            {
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    Authorization: `Bearer ${token}`
+                                }
+                            }
+                        );
+
+                        if (!recResponse.ok) {
+                            throw new Error('Erreur lors de la récupération des recommandations.');
+                        }
+
+                        const recData = await recResponse.json();
+                        return { ...cv, recommendations: recData };
+                    })
+                );
+
+                setCvs(updatedCVs);
             } catch (error) {
                 console.error(error);
                 toast.error('Erreur lors de la récupération des CVs.');
+            } finally {
+                setIsLoading(false);
             }
         };
 
         fetchCVs();
     }, [token, user]);
-
-    const fetchRecommendations = async (cvId) => {
-        try {
-            const response = await fetch(`https://cv-project-api.onrender.com/api/recommendation/cv/${cvId}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error('Erreur HTTP : ' + response.status);
-            }
-
-            const data = await response.json();
-            setRecommendations((prev) => ({ ...prev, [cvId]: data }));
-        } catch (error) {
-            console.error('Erreur lors de la récupération des recommandations :', error);
-        }
-    };
 
     const handleDeleteCV = async (id) => {
         const confirmDelete = window.confirm('Êtes-vous sûr de vouloir supprimer ce CV ?');
@@ -80,6 +89,8 @@ function MyCVs() {
         } catch (error) {
             console.error(error);
             toast.error('Erreur lors de la suppression du CV.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -111,6 +122,10 @@ function MyCVs() {
             toast.error('Erreur lors de la suppression de la recommandation.');
         }
     };
+
+    if (isLoading) {
+        return <LoadingScreen />;
+    }
 
     return (
         <div className="container my-5">
@@ -225,11 +240,11 @@ function MyCVs() {
                                 </div>
                             </div>
                             {/* Recommandations */}
-                            {recommendations[cv._id] && recommendations[cv._id].length > 0 && (
+                            {cv.recommendations.length > 0 && (
                                 <div className="mb-3">
                                     <h5>Recommandations:</h5>
                                     <ul className="list-group">
-                                        {recommendations[cv._id].map((rec, index) => (
+                                    {cv.recommendations.map((rec, index) => (
                                             <li
                                                 key={index}
                                                 className="list-group-item d-flex flex-column align-items-start"
