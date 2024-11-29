@@ -1,7 +1,7 @@
 # FAZER Nino - PEREIRA-ELENGA MAKOUALA Jordy
 
 
-# CV Builder
+# CV Builder Front
 
 Une application web permettant de créer, consulter, modifier et recommander des CVs pour les utilisateurs.
 
