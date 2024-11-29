@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext.jsx';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { format } from 'date-fns';
+import { fr } from 'date-fns/locale';
 
 function MyCVs() {
     const { token, user } = useContext(AuthContext);
@@ -216,20 +218,33 @@ function MyCVs() {
                                         <div className="mb-3">
                                             <h5>Recommandations:</h5>
                                             <ul className="list-group">
-                                                {recommendations[cv._id].map((rec, index) => (
-                                                    <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-                                                        <span>{rec.description}</span>
-                                                        <button
-                                                            className="btn btn-danger btn-sm"
-                                                            onClick={() => handleDeleteRecommendation(cv._id, rec._id)}
-                                                        >
-                                                            Supprimer
-                                                        </button>
-                                                    </li>
-                                                ))}
+                                            {recommendations[cv._id].map((rec, index) => (
+                                                <li
+                                                key={index}
+                                                className="list-group-item d-flex flex-column align-items-start"
+                                                >
+                                                <span className="mb-2">{rec.description}</span>
+                                                {rec.userid && (
+                                                    <p className="mb-1 text-muted">
+                                                    <strong>Par :</strong> {rec.userid.firstname} {rec.userid.lastname}
+                                                    </p>
+                                                )}
+                                                <p className="mb-3">
+                                                    <strong>Le :</strong>{' '}
+                                                    {format(new Date(rec.createdAt), 'dd MMMM yyyy', { locale: fr })}
+                                                </p>
+                                                <button
+                                                    className="btn btn-danger btn-sm align-self-end"
+                                                    onClick={() => handleDeleteRecommendation(cv._id, rec._id)}
+                                                >
+                                                    Supprimer
+                                                </button>
+                                                </li>
+                                            ))}
                                             </ul>
                                         </div>
-                                    )}
+                                        )}
+
 
                                     {/* Boutons */}
                                     <div className="d-flex justify-content-between">

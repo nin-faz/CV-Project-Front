@@ -70,8 +70,7 @@ function CvDetails() {
                     Authorization: `Bearer ${token}`
                 },
                 body: JSON.stringify({
-                    // description: `De la part de ${user.firstname} ${user.lastname}`
-                    description: recommendationDescription
+                    description: recommendationDescription,
                 })
             });
 
