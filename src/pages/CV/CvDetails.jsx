@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext.jsx';
+import { AuthContext } from '../../context/AuthContext.jsx';
 import { toast } from 'react-toastify';
-import Recommendations from '../components/Recommendations';
+import Recommendations from '../../components/Recommendations.jsx';
 
 function CvDetails() {
     const { id } = useParams();
@@ -70,7 +70,7 @@ function CvDetails() {
                     Authorization: `Bearer ${token}`
                 },
                 body: JSON.stringify({
-                    description: recommendationDescription,
+                    description: recommendationDescription
                 })
             });
 
@@ -175,7 +175,7 @@ function CvDetails() {
 
                 {/* Colonne droite : Recommandations */}
                 <div className="col-lg-4">
-                    <div className="card shadow-lg p-4" style={{ width: '110%'}}>
+                    <div className="card shadow-lg p-4" style={{ width: '110%' }}>
                         <div className="card-body">
                             <h3 className="card-title text-primary">Recommandations</h3>
                             <Recommendations recommendations={recommendations || []} />

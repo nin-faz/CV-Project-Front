@@ -5,19 +5,19 @@ import { Route, Routes } from 'react-router-dom';
 import classNames from 'classnames';
 import Home from './pages/Home.jsx';
 import Header from './components/Header.jsx';
-import Register from './pages/Register.jsx';
-import Login from './pages/Login.jsx';
+import Register from './pages/Auth/Register.jsx';
+import Login from './pages/Auth/Login.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import CvDetails from './pages/CvDetails.jsx';
-import CreateCv from './pages/CreateCv.jsx';
-import EditCv from './pages/EditCv.jsx';
-import MyCVs from './pages/MyCVs.jsx';
+import CvDetails from './pages/CV/CvDetails.jsx';
+import CreatetCv from './pages/CV/CreateCv.jsx';
+import EditCv from './pages/CV/EditCv.jsx';
+import MyCVs from './pages/CV/MyCVs.jsx';
+import CvList from './pages/CV/CvList.jsx';
 import NotFound from './pages/NotFound.jsx';
 import ProtectedRoute from './routes/ProtectedRoute.jsx';
-import MyProfile from './pages/MyProfile.jsx';
-import ChangePassword from './pages/ChangePassword.jsx';
-import CvList from './pages/CvList.jsx';
+import MyProfile from './pages/Profile/MyProfile.jsx';
+import ChangePassword from './pages/Profile/ChangePassword.jsx';
 import { ThemeContext } from './context/ThemeContext.jsx';
 
 function App() {
@@ -54,7 +54,7 @@ function App() {
                         path="/create-cv"
                         element={
                             <ProtectedRoute>
-                                <CreateCv />
+                                <CreatetCv />
                             </ProtectedRoute>
                         }
                     />

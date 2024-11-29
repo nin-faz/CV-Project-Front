@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import { AuthContext } from '../context/AuthContext.jsx';
+import { AuthContext } from '../../context/AuthContext.jsx';
 import { toast } from 'react-toastify';
 
 function Login() {

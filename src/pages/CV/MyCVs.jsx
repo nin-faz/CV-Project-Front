@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../context/AuthContext.jsx';
+import { AuthContext } from '../../context/AuthContext.jsx';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import LoadingScreen from '../components/LoadingScreen.jsx';
+import LoadingScreen from '../../components/LoadingScreen.jsx';
 
 function MyCVs() {
     const { token, user } = useContext(AuthContext);
@@ -244,7 +244,7 @@ function MyCVs() {
                                 <div className="mb-3">
                                     <h5>Recommandations:</h5>
                                     <ul className="list-group">
-                                    {cv.recommendations.map((rec, index) => (
+                                        {cv.recommendations.map((rec, index) => (
                                             <li
                                                 key={index}
                                                 className="list-group-item d-flex flex-column align-items-start"

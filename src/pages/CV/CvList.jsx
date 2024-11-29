@@ -1,15 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { SearchContext } from '../context/SearchContext.jsx';
-import LoadingScreen from '../components/LoadingScreen.jsx';
-
+import { SearchContext } from '../../context/SearchContext.jsx';
+import LoadingScreen from '../../components/LoadingScreen.jsx';
 
 function CvList() {
     const [cvs, setCvs] = useState([]); // Liste complète des CV
     const [cvsFiltered, setCvsFiltered] = useState([]); // Liste filtrée pour affichage
     const { searchTerm } = useContext(SearchContext);
     const [isLoading, setIsLoading] = useState(true);
-
-    
 
     // Récupérer tous les CV
     useEffect(() => {

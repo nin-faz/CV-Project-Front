@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../context/AuthContext.jsx';
-import CvForm from '../components/CvForm.jsx';
+import { AuthContext } from '../../context/AuthContext.jsx';
+import CvForm from '../../components/CvForm.jsx';
 import { toast } from 'react-toastify';
 import { useParams, useNavigate } from 'react-router-dom';
 

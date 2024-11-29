@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { AuthContext } from '../context/AuthContext.jsx';
-import CvForm from '../components/CvForm.jsx';
+import { AuthContext } from '../../context/AuthContext.jsx';
+import CvForm from '../../components/CvForm.jsx';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,21 +15,21 @@ function CreateCv() {
                 ...values,
                 diplomes: values.diplomes.map((diplome) => ({
                     ...diplome,
-                    year: parseInt(diplome.year, 10) || null,
+                    year: parseInt(diplome.year, 10) || null
                 })),
                 certifications: values.certifications.map((certification) => ({
                     ...certification,
-                    year: parseInt(certification.year, 10) || null,
+                    year: parseInt(certification.year, 10) || null
                 })),
                 formations: values.formations.map((formation) => ({
                     ...formation,
-                    year: parseInt(formation.year, 10) || null,
+                    year: parseInt(formation.year, 10) || null
                 })),
                 jobs: values.jobs.map((job) => ({
                     ...job,
                     startYear: parseInt(job.startYear, 10) || null,
-                    endYear: parseInt(job.endYear, 10) || null,
-                })),
+                    endYear: parseInt(job.endYear, 10) || null
+                }))
             };
 
             console.log('Prepared values:', JSON.stringify(preparedValues, null, 2));
@@ -38,9 +38,9 @@ function CreateCv() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${token}`
                 },
-                body: JSON.stringify(preparedValues),
+                body: JSON.stringify(preparedValues)
             });
             console.log('Response:', response);
 
@@ -55,7 +55,23 @@ function CreateCv() {
         }
     };
 
-    return <CvForm initialValues={{ firstname: '', lastname: '', description: '', diplomes: [], certifications: [], formations: [], jobs: [], missions: [], compagnies: [], visible: true }} onSubmit={handleSubmit} />;
+    return (
+        <CvForm
+            initialValues={{
+                firstname: '',
+                lastname: '',
+                description: '',
+                diplomes: [],
+                certifications: [],
+                formations: [],
+                jobs: [],
+                missions: [],
+                compagnies: [],
+                visible: true
+            }}
+            onSubmit={handleSubmit}
+        />
+    );
 }
 
 export default CreateCv;
